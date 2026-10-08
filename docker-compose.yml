@@ -1,0 +1,23 @@
+# Dedicated Neo4j for the Graphiti temporal POC.
+# Non-default host ports so it does not collide with other local Neo4j instances.
+services:
+  neo4j:
+    image: neo4j:5.26
+    container_name: graphiti-temporal-poc-neo4j
+    ports:
+      - "7475:7474"   # Browser  -> http://localhost:7475
+      - "7688:7687"   # Bolt     -> bolt://localhost:7688
+    environment:
+      NEO4J_AUTH: neo4j/graphiti-poc-pass
+      NEO4J_server_bolt_advertised__address: localhost:7688
+      NEO4J_PLUGINS: '["apoc"]'
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p graphiti-poc-pass 'RETURN 1' || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  neo4j_data:

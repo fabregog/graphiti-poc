@@ -1,0 +1,15 @@
+[project]
+name = "graphiti-temporal-poc"
+version = "0.1.0"
+description = "POC: Graphiti valid_at/invalid_at behaviour with fact triples (Neo4j + Azure AI Foundry)"
+authors = [
+    { name = "Fernando Abrego", email = "fabrego@assanet.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.142.3",
+    "graphiti-core>=0.30.2",
+    "httpx>=0.28.1",
+    "python-dotenv>=1.2.4",
+    "uvicorn>=0.54.0",
+]
